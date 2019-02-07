@@ -6,7 +6,6 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
-//#include <math>
 using namespace std;
 
 unsigned long int converthextodec(string hexdata){
@@ -45,8 +44,6 @@ float mispredict()
 	int prediction;
 	ifstream random;
 	string linemk;
-	//string 
-	//int j=0;
 	random.open("trace1.txt");
     if (random.is_open())
 	{
@@ -77,56 +74,32 @@ int main(){
 	int m;
 	int k;
 	vector<int> in;
-    //int rows=pow(2,m);
-    //cout<<rows;
-    //int cols=pow(2,k);
     string ind;
     string inind;
-    //bitset<32> a[5];
     bitset<2> value;
-    //string hexdata;
-    //a[0]=2;
-    //a[1]=3;
-    //a[2]=4;
-    //a[3]=5;
-    //a[4]=6;
-    //a[5]=10;
-    //bitset<2> satcount[rows][cols];
-    //bitset<2> globalhist=0;
-    //cout<<globalhist;
     int predict;
     int actualbr;
     int coun;
     int taken;
     int testcounter;
     string intermediateindex;
-    bitset<32> ins;
-    //vector<bool> a;
-    //reading values of m and k
-	//bitset<32> m,k; 
+    bitset<32> ins; 
 	ifstream param;
 	string linemk;
-	//string 
-	//int j=0;
 	param.open("config.txt");
     if (param.is_open())
 	{
 		while (getline(param,linemk))
 		{ 
 	    in.push_back(stoi(linemk));
-	    //sepdata >> m >> k;
-        //cout<<m<<" "<<k<<endl;
         }
         param.close();
     }  
     m=in[0];
-    //cout<<m<<endl;
     k=in[1];
-    //cout<<k<<endl;
     int rows=pow(2,m);
     int cols=pow(2,k);
     bitset<2> satcount[rows][cols];   
-    //initializing the array
     for(int i=0;i<rows;i++)
     {
     	for(int j=0;j<cols;j++)
@@ -134,9 +107,6 @@ int main(){
     		satcount[i][j]=3;
     	}
     }
-	//cout<<satcount[1][1];
-	//reading instructions 
-	//bitset<32> ins; 
 	ifstream imem;
 	string line;
 	vector<bool> a(k);
@@ -150,10 +120,7 @@ int main(){
     else{
     	coun=0;
     }
-	//rotate(a.begin(),a.begin()+1,a.end())
-
-	//string 
-	//int j=0;
+	
 	imem.open("trace.txt");
     if (imem.is_open())
 	{
@@ -162,9 +129,6 @@ int main(){
 	    //int testcounter;
 	    stringstream sepdata(line);
 	    sepdata >> inind >> taken;
-	    //OutputRF(taken);
-	    //cout<<taken;
-	    //testcounter=testcounter+1;
 		ins=converthextodec(inind);
 		intermediateindex=ins.to_string();
         //coun=globalhist.to_ulong(); //tells which 2 bit counter to check into or cols in our case
@@ -176,8 +140,7 @@ int main(){
         	if(a[i]==1){     
         		coun=coun+pow(2,i);
         	}
-        	//cout<<coun<<endl;
-        	//cout<<a.size();
+        	
 
         }
         }
@@ -208,10 +171,7 @@ int main(){
         	{
         		value=0;
         	}
-        	//else
-        	//{
-        		//continue;
-        	//}
+        	
 
 
         }
@@ -228,14 +188,7 @@ int main(){
         	    {
         		    value=0;
         	    }
-        	    //else if(value.to_ulong()==1)
-        	    //{
-        		    //value=0;
-        	    //}
-        	    //else
-        	    //{
-        		    //value=0;
-        	    //}
+        	    
             }
             else
             {
@@ -247,38 +200,28 @@ int main(){
             	{
             		value=3;
             	}
-            	//else if(value.to_ulong()==2)
-            	//{
-            		//value=3;
-            	//}
-            	//else
-            	//{
-            		//value=3;
-            	//}
+         
 
             
             }
-        //cout<<predict<<endl;
+        
         }
     satcount[x.to_ulong()][coun]=value.to_ulong();
-    //cout<<satcount[x.to_ulong()][coun];
-    // pushing the taken or not taken in BHK
+    
     if(k!=0)
     {	
     rotate(a.begin(),a.begin()+1,a.end());
     a[a.size()-1]=taken;
     }
-    //globalhist>>=1;
-    //globalhist[1]=taken;
+    
     OutputRF(predict,taken);
     Out(predict);
 	}
 
-//OutputRF(predict,taken);	
-//cout<<mispredict();
+
 }
 cout<<mispredict();
-//cout<<testcounter;
+
 };
 
 
